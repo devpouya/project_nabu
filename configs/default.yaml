@@ -1,0 +1,71 @@
+# Default configuration for cuneiform NLP training
+
+# Data configuration
+data:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  train_split: 0.8
+  val_split: 0.1
+  # test_split is automatically computed as 1 - train_split - val_split
+
+# PaleoCode directory (optional - uses bundled data by default)
+paleocode_dir: null
+
+# Tokenizer configuration
+tokenizer:
+  type: sign  # Options: 'stroke', 'sign', 'hybrid'
+  max_length: 512
+  vocab_size: null  # Auto-computed from data
+
+# Model configuration
+model:
+  type: transformer_encoder  # Options: 'transformer_encoder', 'transformer_decoder', 'rnn'
+
+  # Transformer-specific settings
+  hidden_size: 256
+  num_layers: 6
+  num_heads: 8
+  feedforward_dim: 1024
+  dropout: 0.1
+
+  # RNN-specific settings (used when model.type = 'rnn')
+  embedding_dim: 256
+  bidirectional: true
+  rnn_type: lstm  # Options: 'lstm', 'gru'
+
+# Training configuration
+training:
+  batch_size: 32
+  epochs: 100
+  learning_rate: 0.0001
+  optimizer: adam
+  weight_decay: 0.0
+
+  # Learning rate scheduler (optional)
+  use_scheduler: false
+  scheduler_type: cosine  # Options: 'cosine', 'step', 'exponential'
+
+  # Device
+  device: cuda  # Options: 'cuda', 'cpu', 'mps'
+
+  # DataLoader
+  num_workers: 4
+  pin_memory: true
+
+  # Gradient clipping
+  max_grad_norm: 1.0
+
+  # Checkpointing
+  save_every: 10  # Save checkpoint every N epochs
+  keep_last_n: 3  # Keep last N checkpoints
+
+# Logging configuration
+logging:
+  use_tensorboard: true
+  log_dir: outputs/logs
+  log_every: 100  # Log every N batches
+
+  # Weights & Biases (optional)
+  use_wandb: false
+  wandb_project: cuneiform-nlp
+  wandb_entity: null
