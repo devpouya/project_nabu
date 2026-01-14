@@ -107,3 +107,6 @@ coverage.xml
 build/
 *.egg-info/
 dist/
+
+# Results directory (generated)
+results/

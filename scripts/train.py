@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from nabu.tokenizers import StrokeTokenizer, SignTokenizer, HybridTokenizer
 from nabu.datasets import CuneiformDataset
 from nabu.dataloaders import build_dataloaders
-from nabu.models import TransformerEncoder, TransformerDecoder, RNNEncoder
+from nabu.models import TransformerEncoder, TransformerDecoder
 
 
 def load_config(config_path: str) -> dict:
@@ -65,16 +65,6 @@ def build_model(config: dict, vocab_size: int):
             num_heads=model_config.get("num_heads", 8),
             feedforward_dim=model_config.get("feedforward_dim", 1024),
             dropout=model_config.get("dropout", 0.1),
-        )
-    elif model_type == "rnn":
-        model = RNNEncoder(
-            vocab_size=vocab_size,
-            embedding_dim=model_config.get("embedding_dim", 256),
-            hidden_dim=model_config.get("hidden_size", 512),
-            num_layers=model_config.get("num_layers", 2),
-            dropout=model_config.get("dropout", 0.1),
-            bidirectional=model_config.get("bidirectional", True),
-            rnn_type=model_config.get("rnn_type", "lstm"),
         )
     else:
         raise ValueError(f"Unknown model type: {model_type}")

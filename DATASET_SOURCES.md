@@ -189,7 +189,6 @@
 
 ### Baselines
 - [ ] N-gram model trained
-- [ ] Character LSTM trained
 - [ ] Transliteration baseline
 - [ ] mBERT zero-shot test
 

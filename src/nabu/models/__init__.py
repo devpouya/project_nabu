@@ -3,7 +3,6 @@
 from .base import BaseModel
 from .embeddings import TokenEmbedding, PositionalEncoding
 from .transformer import TransformerEncoder, TransformerDecoder, TransformerEncoderDecoder
-from .rnn import RNNEncoder, RNNDecoder, RNNEncoderDecoder
 
 __all__ = [
     "BaseModel",
@@ -12,7 +11,4 @@ __all__ = [
     "TransformerEncoder",
     "TransformerDecoder",
     "TransformerEncoderDecoder",
-    "RNNEncoder",
-    "RNNDecoder",
-    "RNNEncoderDecoder",
 ]

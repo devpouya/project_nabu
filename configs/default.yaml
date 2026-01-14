@@ -19,19 +19,14 @@ tokenizer:
 
 # Model configuration
 model:
-  type: transformer_encoder  # Options: 'transformer_encoder', 'transformer_decoder', 'rnn'
+  type: transformer_encoder  # Options: 'transformer_encoder', 'transformer_decoder'
 
-  # Transformer-specific settings
+  # Transformer settings
   hidden_size: 256
   num_layers: 6
   num_heads: 8
   feedforward_dim: 1024
   dropout: 0.1
-
-  # RNN-specific settings (used when model.type = 'rnn')
-  embedding_dim: 256
-  bidirectional: true
-  rnn_type: lstm  # Options: 'lstm', 'gru'
 
 # Training configuration
 training:

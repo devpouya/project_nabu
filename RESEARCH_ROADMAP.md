@@ -57,10 +57,6 @@ This document outlines the research tasks needed to establish baselines, find da
   - Calculate perplexity on test set
   - Use as simple baseline
 
-- [ ] **Character-Level LSTM**
-  - Train vanilla LSTM on sign sequences
-  - Compare with stroke-level approach
-
 ### 2.2 Transliteration-Based Baselines
 
 - [ ] Train models on transliterated text (Latin characters)
@@ -165,7 +161,7 @@ This document outlines the research tasks needed to establish baselines, find da
 
 - [ ] Sign-level vs. stroke-level vs. hybrid tokenization
 - [ ] Effect of PaleoCode vs. simple Unicode encoding
-- [ ] Model architecture comparison (Transformer vs. RNN)
+- [ ] Model architecture comparison (different Transformer configurations)
 - [ ] Impact of pre-training on larger corpora
 
 ### 5.2 Analysis
@@ -227,7 +223,7 @@ This document outlines the research tasks needed to establish baselines, find da
 1. [ ] Search CDLI for Unicode cuneiform datasets
 2. [ ] Download sample corpus (even if small)
 3. [ ] Run preprocessing script on sample data
-4. [ ] Train simple baseline (n-gram or small LSTM)
+4. [ ] Train simple baseline (n-gram or small Transformer)
 5. [ ] Search Google Scholar for "cuneiform NLP" papers
 
 ### This Month:

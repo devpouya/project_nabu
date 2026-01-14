@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from nabu.tokenizers import StrokeTokenizer, SignTokenizer, HybridTokenizer
 from nabu.datasets import CuneiformDataset
 from nabu.dataloaders import build_dataloader
-from nabu.models import TransformerEncoder, TransformerDecoder, RNNEncoder
+from nabu.models import TransformerEncoder, TransformerDecoder
 
 
 def load_tokenizer(vocab_path: str, tokenizer_type: str, paleocode_dir=None):
@@ -140,8 +140,6 @@ def main():
         model = TransformerEncoder(vocab_size=tokenizer.vocab_size)
     elif model_type == "transformer_decoder":
         model = TransformerDecoder(vocab_size=tokenizer.vocab_size)
-    elif model_type == "rnn":
-        model = RNNEncoder(vocab_size=tokenizer.vocab_size)
     else:
         raise ValueError(f"Unknown model type: {model_type}")
 
