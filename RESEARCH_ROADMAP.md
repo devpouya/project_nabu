@@ -217,7 +217,142 @@ This document outlines the research tasks needed to establish baselines, find da
 
 ---
 
-## 8. Immediate Next Steps
+## 8. Image-Based Character Recognition Pipeline
+
+### 8.1 Motivation
+
+Moving from UTF-8/NLP-based approach to direct image recognition:
+- **Larger corpus**: Many tablets have images but no transcriptions
+- **Ground truth**: Existing UTF-8 transcriptions serve as cross-validation
+- **End-to-end**: From tablet photo to stroke encoding
+
+### 8.2 Data Collection
+
+**Image Sources:**
+- [ ] **CDLI Images** - High-resolution tablet photographs
+  - Download tablet images with matching transcriptions
+  - Catalog tablets with images but no transcriptions (expansion potential)
+- [ ] **ORACC/eBL** - Check for linked images
+- [ ] **Published tablet collections** - Museum digitization projects
+- [ ] **3D scans** - CDLI and others have RTI/3D data
+
+**Dataset Preparation:**
+- [ ] Create image-transcription pairs for training
+- [ ] Segment tablets into individual sign regions
+- [ ] Build sign-level image dataset with Unicode labels
+- [ ] Document image quality variations (lighting, damage, angles)
+
+### 8.3 Detection & Recognition Models
+
+**Sign Detection (localization):**
+- [ ] Evaluate YOLO/Faster-RCNN for sign bounding boxes
+- [ ] Explore line-level detection first, then sign segmentation
+- [ ] Handle overlapping/touching signs
+- [ ] Deal with damaged/partial signs
+
+**Sign Recognition (classification):**
+- [ ] CNN-based classifier for individual sign images
+- [ ] Vision Transformer (ViT) for sign classification
+- [ ] ResNet/EfficientNet baselines
+- [ ] Contrastive learning for sign embeddings
+
+**End-to-End Approaches:**
+- [ ] CRNN (CNN + RNN) for line-level recognition
+- [ ] TrOCR / Donut for document OCR
+- [ ] Attention-based sequence-to-sequence models
+
+### 8.4 Stroke-Level Recognition
+
+**Direct stroke detection from images:**
+- [ ] Use F-Clip pipeline on tablet images (not just rendered glyphs)
+- [ ] Train stroke detector on real tablet images
+- [ ] Compare detected strokes with rendered glyph strokes
+
+**Stroke-to-sign matching:**
+- [ ] Build stroke signature database from known signs
+- [ ] Match detected stroke patterns to sign database
+- [ ] Handle sign variants and period-specific forms
+
+### 8.5 Cross-Validation with Existing Data
+
+**Validation strategy:**
+- [ ] Use UTF-8 transcribed tablets as ground truth
+- [ ] Compare image-detected signs with transcriptions
+- [ ] Measure character error rate (CER) and word error rate (WER)
+- [ ] Identify systematic errors (similar-looking signs)
+
+**Encoding validation:**
+- [ ] Run stroke encoder on detected signs
+- [ ] Compare with stroke encoder on rendered Unicode glyphs
+- [ ] Validate that image pipeline produces same encodings
+
+**Confidence calibration:**
+- [ ] Use transcribed tablets to calibrate confidence scores
+- [ ] Identify signs that are commonly confused
+- [ ] Build confusion matrix for sign recognition
+
+### 8.6 Pipeline Architecture
+
+```
+Tablet Image
+    │
+    ▼
+┌─────────────────┐
+│ Line Detection  │  ← Detect text lines/registers
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Sign Detection  │  ← Bounding boxes for each sign
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Sign Recognition│  ← Classify each sign region
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Stroke Encoding │  ← Convert to stroke sequence
+└────────┬────────┘
+         │
+         ▼
+    Encoded Text
+```
+
+### 8.7 Implementation Tasks
+
+**Phase 1: Data & Baselines**
+- [ ] Download CDLI images with transcriptions
+- [ ] Create sign-level image dataset
+- [ ] Train simple CNN classifier as baseline
+- [ ] Evaluate on held-out transcribed tablets
+
+**Phase 2: Detection Pipeline**
+- [ ] Implement/adapt sign detection model
+- [ ] Train on annotated tablet regions
+- [ ] Evaluate detection precision/recall
+
+**Phase 3: Integration**
+- [ ] Connect detection → recognition → encoding
+- [ ] End-to-end evaluation on full tablets
+- [ ] Compare with human transcriptions
+
+**Phase 4: Expansion**
+- [ ] Apply to non-transcribed tablets
+- [ ] Generate new transcriptions
+- [ ] Expert validation of new transcriptions
+
+### 8.8 Research Questions
+
+- [ ] Can image models outperform manual transcription for damaged tablets?
+- [ ] Do stroke patterns from images match rendered glyph patterns?
+- [ ] What is the minimum image quality needed for reliable recognition?
+- [ ] How do period-specific sign variants affect recognition?
+
+---
+
+## 9. Immediate Next Steps
 
 ### This Week:
 1. [ ] Search CDLI for Unicode cuneiform datasets
