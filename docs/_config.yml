@@ -1,0 +1,36 @@
+title: Project Nabu
+description: A Deep Learning Framework for Cuneiform Text Analysis
+baseurl: "/project_nabu"
+url: ""
+
+# Theme
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+  - jekyll-remote-theme
+
+# Navigation
+nav:
+  - title: Home
+    url: /
+  - title: Getting Started
+    url: /getting-started
+  - title: Architecture
+    url: /architecture
+  - title: Encoding Pipeline
+    url: /encoding-pipeline
+  - title: Line Detection
+    url: /line-detection
+  - title: API Reference
+    url: /api/
+
+# Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Exclude files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
